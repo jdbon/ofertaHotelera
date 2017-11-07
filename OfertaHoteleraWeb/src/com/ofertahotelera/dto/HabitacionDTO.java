@@ -1,12 +1,9 @@
 package com.ofertahotelera.dto;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.*;
 
-
-@Entity
 public class HabitacionDTO {
-	
 
 	private int id;
 	private String descripcion;

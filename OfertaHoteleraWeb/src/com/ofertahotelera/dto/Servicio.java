@@ -1,8 +1,5 @@
 package com.ofertahotelera.dto;
 
-import javax.persistence.*;
-
-
 public class Servicio {
 	
 	private int id;

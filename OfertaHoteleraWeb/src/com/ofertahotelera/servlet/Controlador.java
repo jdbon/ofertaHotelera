@@ -1,8 +1,6 @@
 package com.ofertahotelera.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -12,20 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jboss.security.authorization.resources.WebResource;
-
 import com.ofertahotelera.dto.EstadoHotelDTO;
 import com.ofertahotelera.dto.HotelDTO;
 import com.ofertahotelera.dto.MedioDePagoDTO;
-import com.ofertahotelera.entity.EstadoHotel;
-import com.ofertahotelera.entity.Habitacion;
-import com.ofertahotelera.entity.Hotel;
-import com.ofertahotelera.entity.MedioDePago;
-import com.ofertahotelera.entity.Oferta;
-import com.ofertahotelera.rest.EstablecimientoBean;
+import com.ofertahotelera.rest.EstablecimientoServiceBean;
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.fasterxml.jackson.*;
 
 //import Controller.ControladorHotel;
 
@@ -38,7 +27,7 @@ public class Controlador extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@EJB
-	EstablecimientoBean hotelservice;
+	EstablecimientoServiceBean hotelservice;
 	
 	
     /**

@@ -11,12 +11,10 @@ public enum MedioDePagoDTO {
 		
 		private final int value;
 		private MedioDePagoDTO (int value){
-			this.value=value;
+			this.value = value;
 		}
 		public int getValue() {
 			return value;
-		}
-		
-		
+		}		
 		
 }

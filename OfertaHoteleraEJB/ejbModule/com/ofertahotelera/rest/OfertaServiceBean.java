@@ -12,7 +12,7 @@ import com.ofertahotelera.entity.Oferta;
  */
 @Stateless
 @LocalBean
-public class OfertaBean implements OfertaBeanRemote, OfertaBeanLocal {
+public class OfertaServiceBean implements OfertaBeanServiceRemote, OfertaBeanServiceLocal {
 
 	@PersistenceContext(unitName="MyPU")
 	private EntityManager manager;
@@ -20,7 +20,7 @@ public class OfertaBean implements OfertaBeanRemote, OfertaBeanLocal {
     /**
      * Default constructor. 
      */
-    public OfertaBean() {
+    public OfertaServiceBean() {
         // TODO Auto-generated constructor stub
     }
     

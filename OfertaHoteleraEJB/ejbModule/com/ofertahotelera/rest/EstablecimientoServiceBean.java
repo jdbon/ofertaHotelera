@@ -13,7 +13,7 @@ import com.ofertahotelera.entity.Hotel;
  */
 @Stateless
 @LocalBean
-public class EstablecimientoBean implements EstablecimientoBeanRemote, EstablecimientoBeanLocal {
+public class EstablecimientoServiceBean implements EstablecimientoServiceBeanRemote, EstablecimientoServiceBeanLocal {
 
 	@PersistenceContext(unitName="MyPU")
 	private EntityManager manager;
@@ -21,9 +21,13 @@ public class EstablecimientoBean implements EstablecimientoBeanRemote, Estableci
     /**
      * Default constructor. 
      */
-    public EstablecimientoBean() {
+    public EstablecimientoServiceBean() {
         // TODO Auto-generated constructor stub
     }
+    
+	public String sayHello(String name) {	
+		return "Hello " + name + ", EJB from a JAX-RS resource.";
+	}
     
     public int altaHotel(Hotel h) {
     	Hotel hotel = new Hotel();
