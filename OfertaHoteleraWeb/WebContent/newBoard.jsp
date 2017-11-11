@@ -16,12 +16,12 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">MyHotel</a>
+            <a class="navbar-brand">Oferta Hotelera</a>
         </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Inicio</a></li>
-            <li><a href="newBoard">Establecimientos</a></li>
-            <li><a href="unMapLocationToBoard">Ofertas de alojamientos</a></li>
+ 		<ul class="nav navbar-nav">
+            <li><a href="/OfertaHoteleraWeb/">Inicio</a></li>
+            <li><a href="nuevoEstablecimiento.jsp">Establecimientos</a></li>
+            <li><a href="/Web/Controlador?name=AltaOferta1">Ofertas de alojamientos</a></li>
         </ul>
     </div>
 </nav>

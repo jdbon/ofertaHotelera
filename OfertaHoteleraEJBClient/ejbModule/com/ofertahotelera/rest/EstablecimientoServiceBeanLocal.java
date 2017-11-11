@@ -6,4 +6,5 @@ import javax.ejb.Local;
 public interface EstablecimientoServiceBeanLocal {
 	public String sayHello(String name);
 	public int altaHotel(String hotel);
+	public void agregarHab(String habitacion);
 }

@@ -14,10 +14,10 @@
         <div class="navbar-header">
             <a class="navbar-brand">Oferta Hotelera</a>
         </div>
-        <ul class="nav navbar-nav">
-            <li><a href="/Web">Inicio</a></li>
-            <li class="active"><a href="nuevoEstablecimiento.jsp">Establecimientos</a></li>
-            <li><a href="oferta.jsp">Ofertas de alojamientos</a></li>
+ 		<ul class="nav navbar-nav">
+            <li><a href="/OfertaHoteleraWeb/">Inicio</a></li>
+            <li><a href="nuevoEstablecimiento.jsp">Establecimientos</a></li>
+            <li><a href="/Web/Controlador?name=AltaOferta1">Ofertas de alojamientos</a></li>
         </ul>
     </div>
 </nav>

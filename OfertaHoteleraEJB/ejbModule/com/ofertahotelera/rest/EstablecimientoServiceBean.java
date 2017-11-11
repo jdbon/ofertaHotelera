@@ -31,13 +31,9 @@ public class EstablecimientoServiceBean implements EstablecimientoServiceBeanRem
 	}
     
     public int altaHotel(String h) {
-    	System.out.println("llega 3");
     	Gson gson = new Gson();
-    	System.out.println("llega 4");
     	Hotel hotel = new Hotel();
-    	System.out.println("llego hasta aca");
     	hotel = gson.fromJson(h,Hotel.class);
-    	System.out.println(hotel.getDescripcion());
     	try {
     		manager.persist(hotel);
     	} catch(Exception e) {
@@ -47,8 +43,10 @@ public class EstablecimientoServiceBean implements EstablecimientoServiceBeanRem
 		return hotel.getId();
 	}
 	
-	public void agregarHab(Hotel h) {		
+	public void agregarHab(String ha) {		
     	Habitacion hab = new Habitacion();
+    	Gson gson = new Gson();
+    	hab = gson.fromJson(ha, Habitacion.class);
     	try {
     		manager.persist(hab);
     	} catch(Exception e) {
@@ -67,16 +65,17 @@ public class EstablecimientoServiceBean implements EstablecimientoServiceBeanRem
 //	    
 //	}
 //	
-//	public Hotel gethotel(String idHotel){
-//		SessionFactory sf = HibernateUtil.getSessionFactory();
-//		Session s = sf.openSession();
-//		Hotel h = new Hotel();
-//		h.setId(Integer.parseInt(idHotel));
-//		s.load(h,h.getId());
-//		s.close();
-//		return h;
-//
-//	}
+	public Hotel gethotel(String idHotel){
+		Hotel hotel = null;
+    	try {
+    		hotel = manager.find(Hotel.class, idHotel);
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    		System.out.println("Conectado a " + e.getMessage());
+    	}
+    	
+    	return hotel;
+	}
 //	
 //	public Habitacion getHabitacion(String idHab){
 //		SessionFactory sf = HibernateUtil.getSessionFactory();
