@@ -10,8 +10,8 @@ public class HotelDTO {
 	private String direccion;
 
 	private EstadoHotelDTO estado; //Opciones: P [pendiente], A [aprobado], R [rechazado]
-	private String latitud;
-	private String longitud;
+	private int latitud;
+	private int longitud;
 	private String descripcion;
 	private List<Servicio> servicios;
 	private List<MedioDePagoDTO> medioDePagos;
@@ -27,8 +27,8 @@ public class HotelDTO {
 		this.direccion="";
 		this.email="";
 		this.estado=EstadoHotelDTO.Pendiente;
-		this.latitud="";
-		this.longitud="";
+		this.latitud=0;
+		this.longitud=0;
 		this.nombre="";
 		this.servicios=new ArrayList<Servicio>();
 		this.medioDePagos=new ArrayList<MedioDePagoDTO>();
@@ -53,17 +53,17 @@ public class HotelDTO {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public String getLatitud() {
+	public int getLatitud() {
 		return latitud;
 	}
-	public void setLatitud(String latitud) {
-		this.latitud = latitud;
+	public void setLatitud(int i) {
+		this.latitud = i;
 	}
-	public String getLongitud() {
+	public int getLongitud() {
 		return longitud;
 	}
-	public void setLongitud(String longitud) {
-		this.longitud = longitud;
+	public void setLongitud(int i) {
+		this.longitud = i;
 	}
 	public String getDescripcion() {
 		return descripcion;

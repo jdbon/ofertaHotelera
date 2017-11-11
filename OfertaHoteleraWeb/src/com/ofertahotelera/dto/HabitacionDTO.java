@@ -1,16 +1,19 @@
 package com.ofertahotelera.dto;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
+import javax.persistence.*;
 
 
+@Entity
 public class HabitacionDTO {
+	
 
 	private int id;
 	private String descripcion;
 	private int cantPersonas;
 	private List<String> fotos;
 	private String tipo; // vendria a ser la categoria de la hab
-	private List<Servicio> servicios;
+	private List<ServicioDTO> servicios;
 	
 	public HabitacionDTO() {
 		super();
@@ -18,7 +21,7 @@ public class HabitacionDTO {
 		this.descripcion="";
 		this.fotos = new ArrayList<String>();
 		this.tipo="";
-		this.servicios=new ArrayList<Servicio>();
+		this.servicios=new ArrayList<ServicioDTO>();
 	}
 	public int getId() {
 		return id;
@@ -50,10 +53,10 @@ public class HabitacionDTO {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	public List<Servicio> getServicios() {
+	public List<ServicioDTO> getServicios() {
 		return servicios;
 	}
-	public void setServicios(List<Servicio> servicios) {
+	public void setServicios(List<ServicioDTO> servicios) {
 		this.servicios = servicios;
 	}
 	

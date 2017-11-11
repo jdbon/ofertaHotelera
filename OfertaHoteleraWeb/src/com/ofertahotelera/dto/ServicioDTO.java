@@ -1,31 +1,23 @@
-package com.ofertahotelera.entity;
+package com.ofertahotelera.dto;
 
-import javax.persistence.*;
-
-@Entity
-public class Servicio {
+public class ServicioDTO {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column (name="idServicio")
-	private int id;
+	//private int id;
+//	public int getId() {
+//		return id;
+//	}
+//	public void setId(int id) {
+//		this.id = id;
+//	}
 	
-	@Column(name="nombreServicio")
 	private String nombre;
 	private String tipoDeServicio; //servicio de hotel (HO) o de hab (HA)
 	
 	
-	public Servicio() {
+	public ServicioDTO() {
 		super();
 		this.nombre="";
 		this.tipoDeServicio="";
-	}
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public String getNombre() {
 		return nombre;

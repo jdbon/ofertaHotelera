@@ -17,8 +17,12 @@ public class Habitacion {
 	@Column (name="url")
 	private List<String> fotos;
 	private String tipo; // vendria a ser la categoria de la hab
-	@OneToMany
-	@JoinColumn(name="idServicio")
+	  @OneToMany(cascade=CascadeType.ALL)
+	    @JoinTable(
+	            name="Habitacion_Servicio",
+	            joinColumns = @JoinColumn( name="idHabitacion"),
+	            		inverseJoinColumns = @JoinColumn( name="idServicio")
+	    )
 	private List<Servicio> servicios;
 	
 	public Habitacion() {

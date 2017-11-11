@@ -1,8 +1,9 @@
 package com.ofertahotelera.servlet;
 
 import java.io.IOException;
+import java.util.*;
 
-import javax.ejb.EJB;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,13 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ofertahotelera.dto.EstadoHotelDTO;
-import com.ofertahotelera.dto.HotelDTO;
-import com.ofertahotelera.dto.MedioDePagoDTO;
-import com.ofertahotelera.rest.EstablecimientoServiceBean;
-import com.sun.jersey.api.client.Client;
+import com.google.gson.Gson;
 
-//import Controller.ControladorHotel;
+import com.ofertahotelera.dto.*;
+import com.ofertahotelera.dto.Servicio;
+import com.ofertahotelera.entity.*;
+import com.ofertahotelera.resource.EstablecimientoTest;
 
 
 /**
@@ -25,11 +25,7 @@ import com.sun.jersey.api.client.Client;
 @WebServlet("/Controlador")
 public class Controlador extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	@EJB
-	EstablecimientoServiceBean hotelservice;
-	
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,14 +40,14 @@ public class Controlador extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 String value =request.getParameter("name");
-		 if ("AltaHotel".equals(value)){
+			if ("AltaHotel".equals(value)){
 				System.out.println("entro al Alta Hotel");
 				
 				String descripcion=request.getParameter("descripcion");
 //				String destino=request.getParameter("destino");
 				String direccion=request.getParameter("direccion");
 				String email=request.getParameter("email");
-				String estado=request.getParameter("estado");
+				//String estado=request.getParameter("estado");
 				String fotos=request.getParameter("fotos");
 				String latitud=request.getParameter("latitud");
 				String longitud=request.getParameter("longitud");
@@ -76,15 +72,16 @@ public class Controlador extends HttpServlet {
 				HotelDTO hotel1 = new HotelDTO();
 				hotel1.setDescripcion(descripcion);
 //				hotel1.setDestino(destino);
-				hotel1.setDestino("");
+				hotel1.setDestino("bue");
 				hotel1.setDireccion(direccion);
 				hotel1.setEmail(email);
-				hotel1.setEstado(EstadoHotelDTO.Pendiente);
-				hotel1.getFotos().add(fotos);
-				hotel1.setLatitud(latitud);
-				hotel1.setLongitud(longitud);
-	//			hotel1.setMedioDePagos(MedioDePago.Tarjeta);
-				
+				//hotel1.setEstado(EstadoHotelDTO.P);
+				hotel1.getFotos().add("foo foto foto");
+				hotel1.getFotos().add("sahfjafkljdljd");
+				hotel1.setLatitud(Integer.parseInt(latitud));
+				hotel1.setLongitud(Integer.parseInt(longitud));
+//				hotel1.setMedioDePagos(MedioDePago.Tarjeta);
+				//hotel1.setId(999);
 				//hotel1.getMedioDePagos().add(MedioDePago.Tarjeta);
 //				hotel1.getMedioDePagos().add(MedioDePago.valueOf(medioDePagos));
 //				System.out.println(MedioDePago.valueOf(medioDePagos));
@@ -107,11 +104,16 @@ public class Controlador extends HttpServlet {
 				}
 					System.out.println("Cant Medio PAgo " + hotel1.getMedioDePagos().size());
 				
-//				Servicio serv=new Servicio();
-//				serv.setNombre(servicios);
-//				serv.setTipoDeServicio("HO");
-//				hotel1.getServicios().add(serv);
-				//hotel1.setServicios(servicios);
+				Servicio serv=new Servicio();
+				serv.setNombre("wifi");
+				serv.setTipoDeServicio("HO");
+				hotel1.getServicios().add(serv);
+				
+				Servicio serv2=new Servicio();
+				serv2.setNombre("pileta");
+				serv2.setTipoDeServicio("HO");
+				hotel1.getServicios().add(serv2);
+	
 				
 				
 //			String descripcionHab=request.getParameter("descripcionHab");	
@@ -126,33 +128,50 @@ public class Controlador extends HttpServlet {
 //			hab.getFotos().add(fotosHab);
 //			//hab.getServicios().add(null);
 //			hotel1.getHabitaciones().add(hab);
-//				
+//			test test = new test();
+//				test.setNombre("jony");
+//				test.setApellido("ara");
+				System.out.println("llego bien");
+				Gson gson = new Gson();
+				String jsonInString=gson.toJson(hotel1);
+				System.out.println("el json Hotel: "+jsonInString);
 //				ControladorHotel c = new ControladorHotel();
-//				int idHotel=c.altaHotel(hotel1);
-				
-//					Importar Jackson y Yersey
-//					ObjectMapper mapper = new ObjectMapper();		
+//				int idHotel = c.altaHotel(jsonInString);
+//				System.out.println("json1");
+//				ObjectMapper mapper = new ObjectMapper();		
+//					System.out.println("json2");
 					//Object to JSON in String
 //					String jsonInString = mapper.writeValueAsString(hotel1);
-					Client client = Client.create();
-					String getUrl = "http://localhost:8080/rest";
-					String postUrl = "http://localhost:8080/r";
-					com.sun.jersey.api.client.WebResource webResource = client.resource(postUrl);
-					String inputData = "ACA VA EL JSON";
-//					ClientResponse response1 = webResource.type("application/json").post(ClientResponse.class,jsonInString);
-//					if(response1.getStatus()!=201){
-//						throw new RuntimeException("HTTP Error: "+ response1.getStatus());
-					}
 					
-//					String result = response1.getEntity(String.class);
-					System.out.println("Response from the Server: ");
+//					String jsonInString = mapper.writeValueAsString(test);
+//					System.out.println("json3");
+//					Client client = Client.create();
+//					String getUrl = "http://localhost:8080/JAXRS-JSON/rest/student/data/get";
+//					String postUrl = "http://localhost:8080/JAXRS-JSON/rest/student/data/post";
+//					WebResource webResource = client.resource(postUrl);
+//					String inputData = "ACA VA EL JSON";
+//					ClientResponse response = webResource.type("application/json").post(ClientResponse.class,jsonInString);
+//					if(response.getStatus()!=201){
+//						throw new RuntimeException("HTTP Error: "+ response.getStatus());
+//					}
+//					
+//					String result = response.getEntity(String.class);
+//					System.out.println("Response from the Server: ");
 //					System.out.println(result);
 				
-				
+//				System.out.println("mi JSON es: "+ jsonInString);
 //				System.out.println("El id Hotel es "+String.valueOf(idHotel));
+				EstablecimientoTest e = new EstablecimientoTest();
+				try {
+					e.hacer(jsonInString);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				String jspPage = "/newBoard.jsp";
 //				request.setAttribute("idHotel", String.valueOf(idHotel));
-//				dispatch(jspPage, request, response1);
+				request.setAttribute("idHotel", String.valueOf("23"));
+				dispatch(jspPage, request, response);
 				
 			}
 //			if ("AltaOferta2".equals(value)){
@@ -160,7 +179,7 @@ public class Controlador extends HttpServlet {
 //				String idHotel = request.getParameter("selectHotel");
 //				System.out.println("imprime " + idHotel);
 //				ControladorHotel c = new ControladorHotel();
-//				Hotel h = hotelservice.gethotel(idHotel);
+//				Hotel h = c.gethotel(idHotel);
 //				request.setAttribute("selectHotel", idHotel);
 //				request.setAttribute("hotel", h);
 //				String jspPage = "/nuevaOferta2.jsp";
@@ -178,7 +197,7 @@ public class Controlador extends HttpServlet {
 //				String cupo=request.getParameter("cupo");
 //				String estado=request.getParameter("estado");
 //				String polCanc=request.getParameter("polCanc");
-////				ControladorHotel c = new ControladorHotel();
+//				ControladorHotel c = new ControladorHotel();
 //				
 //				Oferta oferta = new Oferta();
 //				oferta.setCupo(Integer.parseInt(cupo));
@@ -189,8 +208,8 @@ public class Controlador extends HttpServlet {
 //				oferta.setPoliticaCanc(polCanc);
 ////				oferta.setNombreHotel(nombreHotel);
 //				oferta.setNombreOferta(nombreOferta);
-//				oferta.setHabitacion(hotelservice.getHabitacion(idHab)); 
-//				hotelservice.altaOferta(oferta);
+//				oferta.setHabitacion(c.getHabitacion(idHab)); 
+//				c.altaOferta(oferta);
 //				
 //				String jspPage = "/index.jsp";
 //				dispatch(jspPage, request, response);
@@ -204,7 +223,7 @@ public class Controlador extends HttpServlet {
 //				String cantPersonasHab=request.getParameter("cantidad");
 //				String fotosHab=request.getParameter("fotosHab");
 //				String serviciosHab=request.getParameter("serviciosHab");
-//				Habitacion hab = new Habitacion();
+//				HabitacionDTO hab = new HabitacionDTO();
 //				hab.setCantPersonas(Integer.parseInt(cantPersonasHab));
 //				hab.setDescripcion(descripcionHab);
 //				hab.setTipo(tipoHab);
@@ -217,36 +236,43 @@ public class Controlador extends HttpServlet {
 //				
 //				
 ////				ControladorHotel c = new ControladorHotel();
-//				Hotel hotel=	hotelservice.gethotel(idHotel);
+////				Hotel hotel=	c.gethotel(idHotel);
+////				
+////				System.out.println("Cargue hotel" + hotel.getId());
 //				
-//				System.out.println("Cargue hotel" + hotel.getId());
-//				
-//				List<Habitacion> habitaciones = new ArrayList<>();
-//				habitaciones = hotel.getHabitaciones();
-//				
-//				habitaciones.add(hab);
+////				List<Habitacion> habitaciones = new ArrayList<>();
+////				habitaciones = hotel.getHabitaciones();
+////				
+////				habitaciones.add(hab);
 ////				hotel.getHabitaciones().add(hab);
 ////				
-//				hotelservice.agregarHab(hotel);
+////				c.agregarHab(hotel);
+//				
+//				
+//				Gson gson = new Gson();
+//				String jsonInString=gson.toJson(hab);
+//				System.out.println("el json Hab: "+jsonInString);
+//				ControladorHotel c = new ControladorHotel();
+//				List<Habitacion> habs = c.agregarHab(jsonInString, idHotel);
 //				
 //				String jspPage = "/newBoard.jsp";
 //				request.setAttribute("idHotel", String.valueOf(idHotel));
-//				request.setAttribute("habitaciones", hotel.getHabitaciones());
+//				request.setAttribute("habitaciones", habs);
 //				dispatch(jspPage, request, response);
 //			}
 //			if ("AltaOferta1".equals(value)){
 //				System.out.println("Alta oferta 1!");
-////				ControladorHotel c = new ControladorHotel();
-////				List<Hotel> hoteles = hotelservice.getHoteles();
-////				System.out.println("algo: " + hoteles.get(0).getDescripcion());
-////				request.setAttribute("hoteles", hoteles);
+//				ControladorHotel c = new ControladorHotel();
+//				List<Hotel> hoteles = c.getHoteles();
+//				System.out.println("algo: " + hoteles.get(0).getDescripcion());
+//				request.setAttribute("hoteles", hoteles);
 //				String jspPage = "/nuevaOferta1.jsp";
 //				dispatch(jspPage, request, response);
 //			}
 			
 			
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-//	}
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -349,7 +375,7 @@ public class Controlador extends HttpServlet {
 ////				hotel1.getHabitaciones().add(hab);
 //				
 //				ControladorHotel c = new ControladorHotel();
-//				hotelservice.altaHotel(hotel1);
+//				c.altaHotel(hotel1);
 //				
 //				
 //				
@@ -412,7 +438,7 @@ public class Controlador extends HttpServlet {
 //				hotel1.getHabitaciones().add(hab);
 //				
 //				ControladorHotel c = new ControladorHotel();
-//				hotelservice.altaHotel(hotel1);
+//				c.altaHotel(hotel1);
 //				
 //				
 //				
@@ -433,7 +459,7 @@ public class Controlador extends HttpServlet {
 //				String servicios=request.getParameter("servicios");
 //				
 //				ControladorHotel c = new ControladorHotel();
-//				Hotel ho=hotelservice.gethotel(hotelId);
+//				Hotel ho=c.gethotel(hotelId);
 //				Habitacion hab = new Habitacion();
 //				hab.setCantPersonas(Integer.parseInt(cantPersonas));
 //				hab.setDescripcion(descripcion);

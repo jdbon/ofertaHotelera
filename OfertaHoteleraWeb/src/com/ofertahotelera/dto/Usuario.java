@@ -1,8 +1,12 @@
 package com.ofertahotelera.dto;
 
+//@Entity 
 
 public class Usuario {
 	
+//	@Id 
+//	@GeneratedValue(strategy=GenerationType.AUTO)
+//	@Column (name="idUsuario")
 	private int id;
 	private String nombre;
 	private String password;

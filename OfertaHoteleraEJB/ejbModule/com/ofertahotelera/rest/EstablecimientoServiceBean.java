@@ -5,6 +5,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.google.gson.Gson;
 import com.ofertahotelera.entity.Habitacion;
 import com.ofertahotelera.entity.Hotel;
 
@@ -29,8 +30,14 @@ public class EstablecimientoServiceBean implements EstablecimientoServiceBeanRem
 		return "Hello " + name + ", EJB from a JAX-RS resource.";
 	}
     
-    public int altaHotel(Hotel h) {
+    public int altaHotel(String h) {
+    	System.out.println("llega 3");
+    	Gson gson = new Gson();
+    	System.out.println("llega 4");
     	Hotel hotel = new Hotel();
+    	System.out.println("llego hasta aca");
+    	hotel = gson.fromJson(h,Hotel.class);
+    	System.out.println(hotel.getDescripcion());
     	try {
     		manager.persist(hotel);
     	} catch(Exception e) {
