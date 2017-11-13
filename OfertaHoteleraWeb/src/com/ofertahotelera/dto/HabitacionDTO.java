@@ -11,7 +11,7 @@ public class HabitacionDTO {
 	private int id;
 	private String descripcion;
 	private int cantPersonas;
-	private List<String> fotos;
+	private String foto;
 	private String tipo; // vendria a ser la categoria de la hab
 	private List<ServicioDTO> servicios;
 	
@@ -19,7 +19,7 @@ public class HabitacionDTO {
 		super();
 		this.cantPersonas=0;
 		this.descripcion="";
-		this.fotos = new ArrayList<String>();
+		this.foto = "";
 		this.tipo="";
 		this.servicios=new ArrayList<ServicioDTO>();
 	}
@@ -41,11 +41,11 @@ public class HabitacionDTO {
 	public void setCantPersonas(int cantPersonas) {
 		this.cantPersonas = cantPersonas;
 	}
-	public List<String> getFotos() {
-		return fotos;
+	public String getFoto() {
+		return foto;
 	}
-	public void setFotos(List<String> fotos) {
-		this.fotos = fotos;
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 	public String getTipo() {
 		return tipo;

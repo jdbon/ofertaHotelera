@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@page import="com.ofertahotelera.entity.*"%>
+<%@page import="com.ofertahotelera.dto.*"%>
 <%@page import="java.util.List"%>
     <meta charset="utf-8">
     <title>REST API Console</title>
@@ -14,21 +14,19 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">MyHotel</a>
+            <a class="navbar-brand" href="/">Oferta Hotelera</a>
         </div>
- 		<ul class="nav navbar-nav">
+        <ul class="nav navbar-nav">
             <li><a href="/OfertaHoteleraWeb/">Inicio</a></li>
-            <li><a href="nuevoEstablecimiento.jsp">Establecimientos</a></li>
-            <li><a href="/Web/Controlador?name=AltaOferta1">Ofertas de alojamientos</a></li>
+            <li><a href="/OfertaHoteleraWeb/Controlador?name=ObtenerServicios">Establecimientos</a></li>
+            <li class="active"><a href="/OfertaHoteleraWeb/Controlador?name=AltaOferta1">Ofertas de alojamientos</a></li>
         </ul>
     </div>
 </nav>
 <%
-Hotel hotel = (Hotel) request.getAttribute("hotel");
-out.print("<p>" + request.getAttribute("selectHotel") +"</p>");
-out.print("<p>" + hotel.getNombre() +"</p>");
-out.print(hotel.getNombre());
+HotelDTO hotel = (HotelDTO) request.getAttribute("hotel");
 %>
+
 <div class="container">
     <div class="starter-template">
         <h1>Oferta de Hotel</h1>
@@ -58,17 +56,21 @@ out.print(hotel.getNombre());
             <label>Elegi un tipo de habitacion:</label>
                  <select class="form-control" name="selectHab">
                 <%
-        List<Habitacion> habitaciones = (List<Habitacion>) hotel.getHabitaciones();
-    	for(Habitacion hab: habitaciones){
+        List<HabitacionDTO> habitaciones = (List<HabitacionDTO>) hotel.getHabitaciones();
+    	for(HabitacionDTO hab: habitaciones){
     		out.print("<option value=\""+hab.getId()+"\">"+hab.getTipo()+"</option>");
         }
 %>
                 </select>
         </div>
-        <div class="form-group">
+           <div class="form-group">
             <label>Estado:</label>
-            <input type="text" id="estado" name="estado"
-                   class="form-control">
+            <select class="form-control" name="selectEstado">
+               
+    	<option value="Activa">Activa</option>
+    	<option value="Inactiva">Inactiva</option>
+    	
+                </select>
         </div>
         <div class="form-group">
             <label>Cupo:</label>
@@ -83,14 +85,15 @@ out.print(hotel.getNombre());
                 </div>
         </div>
         <div class="form-group">
-            <label>Politicas de capacitacion:</label>
+            <label>Politicas de cancelacion:</label>
             <input type="text" id="polCanc" name="polCanc"
                    class="form-control">
         </div>
-        <input type="submit" value="AltaOferta3" name="name">
+    <!--     <input type="submit" value="AltaOferta3" name="name"> -->
+         <button type="submit" name="name" value="AltaOferta3">Crear Oferta</button>
         <button type="reset">Cancelar</button>
     </form>
-    <table class="table table-striped">
+<!--    <table class="table table-striped">
         <thead>
         <tr>
             <th>Nombre</th>
@@ -121,6 +124,6 @@ out.print(hotel.getNombre());
         </tbody>
     </table>
     <div id="response-content"></div>
-</div>
+</div> -->
 </body>
 </html>

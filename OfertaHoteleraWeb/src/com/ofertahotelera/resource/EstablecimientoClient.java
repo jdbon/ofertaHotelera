@@ -6,12 +6,22 @@ import java.util.Hashtable;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import java.io.DataOutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 
+import com.google.gson.*;
+import com.ofertahotelera.entity.Hotel;
+import com.ofertahotelera.integracion.InterfacesBO;
 import com.ofertahotelera.rest.EstablecimientoServiceBeanRemote;
+import org.apache.commons.io.IOUtils;
 
 public class EstablecimientoClient {
 
 	private static EstablecimientoClient instance = null;
+	private static InterfacesBO interfaz = InterfacesBO.getInstancia();
 	private EstablecimientoServiceBeanRemote mbr;
 		
 	protected EstablecimientoClient() {
@@ -53,11 +63,69 @@ public class EstablecimientoClient {
 		return idHotel;
 	}
 
-	public void agregarHab(String ha) throws Exception {
+	public String agregarHab(String ha, String idHotel) throws Exception {
 
-		mbr.agregarHab(ha);
+		return mbr.agregarHab(ha, idHotel);
 
 	}
+
+	public String getHotelesActivos() {
+
+		return mbr.getHotelesActivos();
+	}
+	
+	public String getHotel(String idhotel) {
+
+		return mbr.getHotel(idhotel);
+	}
+
+	public void enviarSolicitud(String solicitud, String idHotel) {
+			
+		
+		String rta="";
+		try {
+			 rta= interfaz.enviarSolicitudBO(solicitud);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error al enviar solitud al BO" + e.getMessage());
+		}
+		
+		JsonParser parser = new JsonParser();
+		JsonObject obj = parser.parse(rta).getAsJsonObject();
+		int idBO = obj.get("id").getAsInt();
+		System.out.println("el id de BO: "+idBO);
+		
+		mbr.grabarIdBO(idBO,idHotel);
+	}
+
+	public String getHotelByHab(String idHab) {
+		return mbr.getHotelById(idHab);
+	}
+
+	public void grabarLog(String json) {
+		// TODO Auto-generated method stub
+		
+		
+		try {
+			  interfaz.enviarLog(json);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("error al enviar solitud al BO" + e.getMessage());
+		}
+		
+	}
+
+
+
+	
+	
+	
+
+	
+
+
 
 	
 }

@@ -3,15 +3,17 @@ package com.ofertahotelera.dto;
 public class Servicio {
 	
 	private int id;
+	
+	
+	private String nombre;
+	private String tipoDeServicio; //servicio de hotel (HO) o de hab (HA)
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	private String nombre;
-	private String tipoDeServicio; //servicio de hotel (HO) o de hab (HA)
 	
 	
 	public Servicio() {

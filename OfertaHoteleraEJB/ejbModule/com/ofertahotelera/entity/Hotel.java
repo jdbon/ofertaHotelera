@@ -17,8 +17,8 @@ public class Hotel implements Serializable{
 	private String direccion;
 	@Enumerated(EnumType.STRING)
 	private EstadoHotel estado; //Opciones: P [pendiente], A [aprobado], R [rechazado]
-	private int latitud;
-	private int longitud;
+	private Double latitud;
+	private Double longitud;
 	private String descripcion;
 	  @OneToMany(cascade=CascadeType.ALL)
 	    @JoinTable(
@@ -34,10 +34,11 @@ public class Hotel implements Serializable{
 	@Column (name="medioDePago")
 	private List<MedioDePago> medioDePagos;
 	
-	@ElementCollection(targetClass=String.class)
-	@JoinTable(joinColumns=@JoinColumn(name="idHotel"))
-	@Column (name="url")
-	private List<String> fotos;
+//	@ElementCollection(targetClass=String.class)
+//	@JoinTable(joinColumns=@JoinColumn(name="idHotel"))
+//	@Column (name="url")
+//	private List<String> fotos;
+	private String foto;
 	
 	private String email;
 	private String destino; //falta definirlo por el profesor
@@ -54,12 +55,12 @@ public class Hotel implements Serializable{
 		this.direccion="";
 		this.email="";
 		this.estado=EstadoHotel.Pendiente;
-		this.latitud=0;
-		this.longitud=0;
+		this.latitud=0.1d;
+		this.longitud=0.1d;
 		this.nombre="";
 		this.servicios=new ArrayList<Servicio>();
 		this.medioDePagos=new ArrayList<MedioDePago>();
-		this.fotos=new ArrayList<String>();
+		this.foto="";
 		this.habitaciones=new ArrayList<Habitacion>();
 		this.idBO = 0;
 	}
@@ -81,16 +82,16 @@ public class Hotel implements Serializable{
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public int getLatitud() {
+	public Double getLatitud() {
 		return latitud;
 	}
-	public void setLatitud(int latitud) {
+	public void setLatitud(Double latitud) {
 		this.latitud = latitud;
 	}
-	public int getLongitud() {
+	public Double getLongitud() {
 		return longitud;
 	}
-	public void setLongitud(int longitud) {
+	public void setLongitud(Double longitud) {
 		this.longitud = longitud;
 	}
 	public String getDescripcion() {
@@ -118,11 +119,11 @@ public class Hotel implements Serializable{
 	public void setMedioDePagos(List<MedioDePago> medioDePagos) {
 		this.medioDePagos = medioDePagos;
 	}
-	public List<String> getFotos() {
-		return fotos;
+	public String getFoto() {
+		return foto;
 	}
-	public void setFotos(List<String> fotos) {
-		this.fotos = fotos;
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}	
 	
 	public String getEmail() {

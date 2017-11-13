@@ -5,14 +5,15 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.ofertahotelera.entity.Oferta;
+import com.google.gson.Gson;
+import com.ofertahotelera.entity.*;
 
 /**
  * Session Bean implementation class OfertaBean
  */
 @Stateless
 @LocalBean
-public class OfertaServiceBean implements OfertaBeanServiceRemote, OfertaBeanServiceLocal {
+public class OfertaServiceBean implements OfertaServiceBeanRemote, OfertaServiceBeanLocal {
 
 	@PersistenceContext(unitName="MyPU")
 	private EntityManager manager;
@@ -24,15 +25,39 @@ public class OfertaServiceBean implements OfertaBeanServiceRemote, OfertaBeanSer
         // TODO Auto-generated constructor stub
     }
     
-	public void altaOferta(Oferta oferta)
+	public void altaOferta(String json, String idHab)
 	{
-    	Oferta ofer = new Oferta();
+		Habitacion hab= new Habitacion();
+		hab= this.getHabitacion(idHab);
+		System.out.println("recupere hab");
+		Gson gson= new Gson();
+		Oferta oferta = new Oferta();
+		oferta= gson.fromJson(json, Oferta.class);
+		System.out.println("json a oferta");
+		oferta.setHabitacion(hab);
+		
+    
     	try {
-    		manager.persist(ofer);
+    		System.out.println("voy a persistir");
+    		manager.persist(oferta);
     	} catch(Exception e) {
     		e.printStackTrace();
-    		System.out.println("Conectado a " + e.getMessage());
+    		System.out.println("error al guardar oferta " + e.getMessage());
     	}
+	}
+	
+	
+	@SuppressWarnings("unused")
+	private Habitacion getHabitacion(String idHab){
+		
+    	try {
+    		return manager.find(Habitacion.class, Integer.parseInt(idHab));
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    		System.out.println("obteniendo hotel por Id (String)" + e.getMessage());
+    	}
+    	return null;
+
 	}
 
 }

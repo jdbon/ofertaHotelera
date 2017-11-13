@@ -15,9 +15,9 @@
             <a class="navbar-brand">Oferta Hotelera</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="/OfertaHoteleraWeb/">Inicio</a></li>
-            <li><a href="nuevoEstablecimiento.jsp">Establecimientos</a></li>
-            <li><a href="/Web/Controlador?name=AltaOferta1">Ofertas de alojamientos</a></li>
+            <li class="active"><a href="/OfertaHoteleraWeb/">Inicio</a></li>
+            <li><a href="/OfertaHoteleraWeb/Controlador?name=ObtenerServicios">Establecimientos</a></li>
+            <li><a href="/OfertaHoteleraWeb/Controlador?name=AltaOferta1">Ofertas de alojamientos</a></li>
         </ul>
     </div>
 </nav>

@@ -1,11 +1,16 @@
 package com.ofertahotelera.rest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import com.google.gson.Gson;
+import com.ofertahotelera.entity.EstadoHotel;
 import com.ofertahotelera.entity.Habitacion;
 import com.ofertahotelera.entity.Hotel;
 
@@ -38,55 +43,113 @@ public class EstablecimientoServiceBean implements EstablecimientoServiceBeanRem
     		manager.persist(hotel);
     	} catch(Exception e) {
     		e.printStackTrace();
-    		System.out.println("Conectado a " + e.getMessage());
+    		System.out.println("error dando de alta hotel " + e.getMessage());
     	}
 		return hotel.getId();
 	}
 	
-	public void agregarHab(String ha) {		
+	public String agregarHab(String ha, String idHotel) {	
+		Hotel hotel= new Hotel();
+		hotel=this.gethotel(Integer.parseInt(idHotel));
     	Habitacion hab = new Habitacion();
     	Gson gson = new Gson();
     	hab = gson.fromJson(ha, Habitacion.class);
+    	hotel.getHabitaciones().add(hab);
     	try {
-    		manager.persist(hab);
+    		manager.merge(hotel);
     	} catch(Exception e) {
     		e.printStackTrace();
-    		System.out.println("Conectado a " + e.getMessage());
+    		System.out.println("error al agregar hab " + e.getMessage());
     	}
+    	String habitacionesJson = gson.toJson(hotel.getHabitaciones());
+    	return habitacionesJson;
 	}
 	
-//	public List<Hotel> getHoteles(){
-//		SessionFactory sf = HibernateUtil.getSessionFactory();
-//		Session s = sf.openSession();
-//		List<Hotel> hoteles ;
-//		hoteles = s.createQuery("FROM Hotel where estado = 'A'").list();
-////		s.close();
-//	    return hoteles;
-//	    
-//	}
-//	
-	public Hotel gethotel(String idHotel){
+	public String getHotelesActivos(){
+		
+		List<Hotel> hoteles = new ArrayList<>();
+    	try {
+
+//    		List hoteles2 =  manager.createQuery(
+//				    "SELECT h FROM Hotel h WHERE h.estado = ?1")
+//				    .setParameter(1, EstadoHotel.Aprobado)
+//				    .getResultList();
+    		List hoteles2 =  manager.createQuery(
+				    "SELECT h FROM Hotel h")
+				    .getResultList();
+    		
+    		hoteles = (List<Hotel>) hoteles2;
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    		System.out.println("Error al ejecutar la consulta de hoteles activos: " + e.getMessage());
+    	}
+    	Gson gson = new Gson();
+    	return gson.toJson(hoteles);
+	    
+	}
+	
+	public Hotel gethotel(int idHotel){
 		Hotel hotel = null;
     	try {
     		hotel = manager.find(Hotel.class, idHotel);
     	} catch(Exception e) {
     		e.printStackTrace();
-    		System.out.println("Conectado a " + e.getMessage());
+    		System.out.println("obteniendo hotel por Id (int) " + e.getMessage());
     	}
     	
     	return hotel;
 	}
-//	
-//	public Habitacion getHabitacion(String idHab){
-//		SessionFactory sf = HibernateUtil.getSessionFactory();
-//		Session s = sf.openSession();
-//		Habitacion h = new Habitacion();
-//		h.setId(Integer.parseInt(idHab));
-//		s.load(h,h.getId());
-//		s.close();
-//		return h;
-//
-//	}
+	
+	public String getHotel(String idHotel){
+		Hotel hotel = null;
+    	try {
+    		hotel = manager.find(Hotel.class, Integer.parseInt(idHotel));
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    		System.out.println("obteniendo hotel por Id (String)" + e.getMessage());
+    	}
+    	Gson gson = new Gson();
+    	
+    	return gson.toJson(hotel);
+	}
+
+	@Override
+	public void grabarIdBO(int idBO, String idHotel) {
+		// TODO Auto-generated method stub
+		Hotel hotel= new Hotel();
+		hotel=this.gethotel(Integer.parseInt(idHotel));
+		hotel.setIdBO(idBO);
+		
+		try {
+    		manager.merge(hotel);
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    		System.out.println("error al agregar idBO " + e.getMessage());
+    	}
+		
+	}
+
+	@Override
+	public String getHotelById(String idHab) {
+		Hotel hotel = null;
+    	try {
+    		hotel = (Hotel) manager.createQuery(
+				    "SELECT h FROM Hotel h JOIN h.habitaciones ha WHERE ha.id = ?1")
+				    .setParameter(1, Integer.parseInt(idHab))
+				    .getSingleResult();
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    		System.out.println("obteniendo hotel por IdHab " + e.getMessage());
+    	}
+    	Gson gson = new Gson();
+    	System.out.println("------------hotel es: "+gson.toJson(hotel));
+    	return gson.toJson(hotel);
+	}
+
+
+	
+
+
 
 
 

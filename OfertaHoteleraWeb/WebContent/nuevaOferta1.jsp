@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@page import="com.ofertahotelera.entity.*"%>
+<%@page import="com.ofertahotelera.dto.*"%>
 <%@page import="java.util.List"%>
     <meta charset="utf-8">
     <title>REST API Console</title>
@@ -14,18 +14,18 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">MyHotel</a>
+            <a class="navbar-brand" href="/">Oferta Hotelera</a>
         </div>
- 		<ul class="nav navbar-nav">
+        <ul class="nav navbar-nav">
             <li><a href="/OfertaHoteleraWeb/">Inicio</a></li>
-            <li><a href="nuevoEstablecimiento.jsp">Establecimientos</a></li>
-            <li><a href="/Web/Controlador?name=AltaOferta1">Ofertas de alojamientos</a></li>
+            <li><a href="/OfertaHoteleraWeb/Controlador?name=ObtenerServicios">Establecimientos</a></li>
+            <li class="active"><a href="/OfertaHoteleraWeb/Controlador?name=AltaOferta1">Ofertas de alojamientos</a></li>
         </ul>
     </div>
 </nav>
 <div class="container">
     <div class="starter-template">
-        <h1>Oferta de Hotel</h1>
+        <h1>Oferta Hotelera</h1>
     </div>
     <form action="Controlador" method="get">
 
@@ -34,16 +34,17 @@
             <label>Elegi el hotel:</label>
                 <select class="form-control" name="selectHotel">
                 <%
-List<Hotel> hoteles = (List<Hotel>) request.getAttribute("hoteles");
+List<HotelDTO> hoteles = (List<HotelDTO>) request.getAttribute("hoteles");
     if(hoteles != null){
-    	for(Hotel h: hoteles){
+    	for(HotelDTO h: hoteles){
     		out.print("<option value=\""+h.getId()+"\">"+h.getNombre()+"</option>");
         }
     }
 %>
                 </select>
         </div>
-        <input type="submit" value="AltaOferta2" name="name">
+     <!--    <input type="submit" value="AltaOferta2" name="name"> -->
+          <button type="submit" name="name" value="AltaOferta2">Seleccionar</button>
         <button type="reset">Cancelar</button>
     </form>
 </div>

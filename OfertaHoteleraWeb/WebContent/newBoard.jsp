@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@page import="com.ofertahotelera.entity.*"%>
+<%@page import="com.ofertahotelera.dto.*"%>
 <%@page import="java.util.List"%>
     <meta charset="utf-8">
     <title>REST API Console</title>
@@ -18,23 +18,26 @@
         <div class="navbar-header">
             <a class="navbar-brand">Oferta Hotelera</a>
         </div>
- 		<ul class="nav navbar-nav">
+        <ul class="nav navbar-nav">
             <li><a href="/OfertaHoteleraWeb/">Inicio</a></li>
-            <li><a href="nuevoEstablecimiento.jsp">Establecimientos</a></li>
-            <li><a href="/Web/Controlador?name=AltaOferta1">Ofertas de alojamientos</a></li>
+            <li class="active"><a href="/OfertaHoteleraWeb/Controlador?name=ObtenerServicios">Establecimientos</a></li>
+            <li><a href="/OfertaHoteleraWeb/Controlador?name=AltaOferta1">Ofertas de alojamientos</a></li>
         </ul>
     </div>
 </nav>
 <div class="container">
     <div class="starter-template">
-    <p>Me ha llegado <%= request.getAttribute("idHotel") %></p>
+    <%String nombre=request.getAttribute("nombre").toString();
+    String n=request.getAttribute("idHotel").toString();%>
+<!--     <p>Me ha llegado <%= request.getAttribute("idHotel") %></p> -->
         <h1>Tipo de Habitacion</h1>
    <!--   <form action="/RESTExample/api/decision/my" method="post">-->
     <form action="Controlador" method="get">
 <%
-String n=request.getAttribute("idHotel").toString();
+
 
 out.print("<input type=\"hidden\" name=\"idHotel\" value=\""+n+"\">");
+out.print("<input type=\"hidden\" name=\"nombre\" value=\""+nombre+"\">");
 
 %>
 
@@ -52,9 +55,43 @@ out.print("<input type=\"hidden\" name=\"idHotel\" value=\""+n+"\">");
             <input type="text" id="tipo" name="tipo"
                    class="form-control">
         </div>
-        <input id="input-b1" name="input-b1" type="file" class="file">
-        <br/>
-        <div class="form-group">
+               <div class="form-group">
+            <label>Foto URL:</label>
+            <select class="form-control" name="selectFoto">
+               
+    	<option value="hab1.jpg">Habitacion1</option>
+    	<option value="hab2.jpg">Habitacion2</option>
+    	<option value="hab3.jpg">Habitacion3</option>
+    	<option value="hab4.jpg">Habitacion4</option>
+    	<option value="hab5.jpg">Habitacion5</option>    
+                </select>
+        </div>
+        
+        
+           <div class="form-group">
+            <label>Servicios:</label>
+         
+                <%
+List<String> servicios = (List<String>) request.getAttribute("serviciosHab");
+                if(servicios != null){
+   int cantServ = servicios.size();
+   out.print("<input type=\"hidden\" name=\"cantServ\" value=\""+cantServ+"\">");
+  
+    
+    	for(int i=0;i<servicios.size();i++){
+    		out.print(" <div class=\"checkbox\"><label><input type =\"checkbox\" value=\""+servicios.get(i)+"\" name =\""+i+"\">"+servicios.get(i)+"</label></div>");
+        }
+    }
+%>
+</div>
+        
+        
+        
+        
+        
+        
+        
+   <!--     <div class="form-group">
             <label>Servicios:</label>
             <div class="checkbox">
                 <label><input type="checkbox" value="">Servicio al cuarto</label>
@@ -62,10 +99,25 @@ out.print("<input type=\"hidden\" name=\"idHotel\" value=\""+n+"\">");
             <div class="checkbox">
                 <label><input type="checkbox" value="">Pay per view</label>
             </div>
-        </div>
-        <input type="submit" value="AltaHabitacion" name="name">
+        </div> -->
+        <!-- <input type="submit" value="AltaHabitacion" name="name"> -->
+         <button type="submit" name="name" value="AltaHabitacion">Crear Habitacion</button>
         <button type="reset">Cancelar</button>
+        
     </form>
+    </br>
+    </br>
+    
+   <form action="Controlador" method="get">
+     <%
+	
+     out.print("<input type=\"hidden\" name=\"idHotel\" value=\""+n+"\">");
+	out.print("<input type=\"hidden\" name=\"nombre\" value=\""+nombre+"\">");
+	
+	%>
+	<input type="submit" value="EnviarSolicitud" name="name">
+    
+	</form>
 
     <table class="table table-striped">
         <thead>
@@ -77,9 +129,9 @@ out.print("<input type=\"hidden\" name=\"idHotel\" value=\""+n+"\">");
         </thead>
         <tbody>
          <%
-List<Habitacion> habitaciones = (List<Habitacion>) request.getAttribute("habitaciones");
+List<HabitacionDTO> habitaciones = (List<HabitacionDTO>) request.getAttribute("habitaciones");
     if(habitaciones != null){
-    	for(Habitacion h: habitaciones){
+    	for(HabitacionDTO h: habitaciones){
         	out.print("<tr> <td> " +h.getDescripcion()+ "</td><td>"+ h.getCantPersonas()+ "</td><td>"+ h.getTipo()+ "</td></tr>");
         }
 

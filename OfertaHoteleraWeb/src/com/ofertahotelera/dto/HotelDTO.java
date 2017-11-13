@@ -10,15 +10,16 @@ public class HotelDTO {
 	private String direccion;
 
 	private EstadoHotelDTO estado; //Opciones: P [pendiente], A [aprobado], R [rechazado]
-	private int latitud;
-	private int longitud;
+	private Double latitud;
+	private Double longitud;
 	private String descripcion;
-	private List<Servicio> servicios;
+	private List<ServicioDTO> servicios;
 	private List<MedioDePagoDTO> medioDePagos;
-	private List<String> fotos;
+	private String foto;
 	private String email;
 	private String destino; //falta definirlo por el profesor
 	private List<HabitacionDTO> habitaciones;
+	private int idBO;
 	
 	public HotelDTO() {
 		super();
@@ -27,13 +28,14 @@ public class HotelDTO {
 		this.direccion="";
 		this.email="";
 		this.estado=EstadoHotelDTO.Pendiente;
-		this.latitud=0;
-		this.longitud=0;
+		this.latitud= 0.1d;
+		this.longitud= 0.1d;
 		this.nombre="";
-		this.servicios=new ArrayList<Servicio>();
+		this.servicios=new ArrayList<ServicioDTO>();
 		this.medioDePagos=new ArrayList<MedioDePagoDTO>();
-		this.fotos=new ArrayList<String>();
+		this.foto="";
 		this.habitaciones=new ArrayList<HabitacionDTO>();
+		this.idBO = 0;
 	}
 	public int getId() {
 		return id;
@@ -53,16 +55,16 @@ public class HotelDTO {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public int getLatitud() {
+	public Double getLatitud() {
 		return latitud;
 	}
-	public void setLatitud(int i) {
+	public void setLatitud(Double i) {
 		this.latitud = i;
 	}
-	public int getLongitud() {
+	public Double getLongitud() {
 		return longitud;
 	}
-	public void setLongitud(int i) {
+	public void setLongitud(Double i) {
 		this.longitud = i;
 	}
 	public String getDescripcion() {
@@ -71,10 +73,10 @@ public class HotelDTO {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public List<Servicio> getServicios() {
+	public List<ServicioDTO> getServicios() {
 		return servicios;
 	}
-	public void setServicios(List<Servicio> servicios) {
+	public void setServicios(List<ServicioDTO> servicios) {
 		this.servicios = servicios;
 	}
 	
@@ -90,11 +92,11 @@ public class HotelDTO {
 	public void setMedioDePagos(List<MedioDePagoDTO> medioDePagos) {
 		this.medioDePagos = medioDePagos;
 	}
-	public List<String> getFotos() {
-		return fotos;
+	public String getFoto() {
+		return foto;
 	}
-	public void setFotos(List<String> fotos) {
-		this.fotos = fotos;
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}	
 	
 	public String getEmail() {
@@ -114,6 +116,12 @@ public class HotelDTO {
 	}
 	public void setHabitaciones(List<HabitacionDTO> habitaciones) {
 		this.habitaciones = habitaciones;
+	}
+	public int getIdBO() {
+		return idBO;
+	}
+	public void setIdBO(int idBO) {
+		this.idBO = idBO;
 	}
 	
 	

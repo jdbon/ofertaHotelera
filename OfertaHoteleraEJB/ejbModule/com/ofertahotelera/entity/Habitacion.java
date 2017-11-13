@@ -12,10 +12,10 @@ public class Habitacion {
 	private int id;
 	private String descripcion;
 	private int cantPersonas;
-	@ElementCollection(targetClass=String.class)
-	@JoinTable(joinColumns=@JoinColumn(name="idHabitacion"))
-	@Column (name="url")
-	private List<String> fotos;
+//	@ElementCollection(targetClass=String.class)
+//	@JoinTable(joinColumns=@JoinColumn(name="idHabitacion"))
+//	@Column (name="url")
+	private String foto;
 	private String tipo; // vendria a ser la categoria de la hab
 	  @OneToMany(cascade=CascadeType.ALL)
 	    @JoinTable(
@@ -29,7 +29,7 @@ public class Habitacion {
 		super();
 		this.cantPersonas=0;
 		this.descripcion="";
-		this.fotos = new ArrayList<String>();
+		this.foto ="";
 		this.tipo="";
 		this.servicios=new ArrayList<Servicio>();
 	}
@@ -51,11 +51,11 @@ public class Habitacion {
 	public void setCantPersonas(int cantPersonas) {
 		this.cantPersonas = cantPersonas;
 	}
-	public List<String> getFotos() {
-		return fotos;
+	public String getFoto() {
+		return foto;
 	}
-	public void setFotos(List<String> fotos) {
-		this.fotos = fotos;
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 	public String getTipo() {
 		return tipo;
