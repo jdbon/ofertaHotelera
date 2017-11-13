@@ -78,6 +78,7 @@
             <label>Servicios:</label>
          
                 <%
+                @SuppressWarnings("unchecked")
 List<String> servicios = (List<String>) request.getAttribute("nombresServicios");
                 if(servicios != null){
    int cantServ = servicios.size();
@@ -252,10 +253,10 @@ List<String> servicios = (List<String>) request.getAttribute("nombresServicios")
 <option value="Mamuel Choique">Mamuel Choique</option>
 <option value="Mencué">Mencué</option>
 <option value="Nahuel Niyeu">Nahuel Niyeu</option>
-        </select><div>
+        </select></div>
         
-        </br>
-        </br>
+        <br />
+        <br />
         
       <!--   <input type="submit" value="AltaHotel" name="name"> -->
         <button type="submit" name="name" value="AltaHotel">Crear Establecimiento</button>

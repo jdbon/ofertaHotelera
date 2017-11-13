@@ -6,17 +6,11 @@ import java.util.Hashtable;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import java.io.DataOutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 
-import com.google.gson.*;
-import com.ofertahotelera.entity.Hotel;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.ofertahotelera.integracion.InterfacesBO;
 import com.ofertahotelera.rest.EstablecimientoServiceBeanRemote;
-import org.apache.commons.io.IOUtils;
 
 public class EstablecimientoClient {
 
@@ -86,7 +80,6 @@ public class EstablecimientoClient {
 		try {
 			 rta= interfaz.enviarSolicitudBO(solicitud);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("error al enviar solitud al BO" + e.getMessage());
 		}
@@ -104,13 +97,11 @@ public class EstablecimientoClient {
 	}
 
 	public void grabarLog(String json) {
-		// TODO Auto-generated method stub
 		
 		
 		try {
 			  interfaz.enviarLog(json);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("error al enviar solitud al BO" + e.getMessage());
 		}

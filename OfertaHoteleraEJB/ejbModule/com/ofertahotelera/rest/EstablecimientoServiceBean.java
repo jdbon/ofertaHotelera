@@ -7,10 +7,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
 import com.google.gson.Gson;
-import com.ofertahotelera.entity.EstadoHotel;
 import com.ofertahotelera.entity.Habitacion;
 import com.ofertahotelera.entity.Hotel;
 
@@ -28,7 +26,6 @@ public class EstablecimientoServiceBean implements EstablecimientoServiceBeanRem
      * Default constructor. 
      */
     public EstablecimientoServiceBean() {
-        // TODO Auto-generated constructor stub
     }
     
 	public String sayHello(String name) {	
@@ -65,6 +62,7 @@ public class EstablecimientoServiceBean implements EstablecimientoServiceBeanRem
     	return habitacionesJson;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public String getHotelesActivos(){
 		
 		List<Hotel> hoteles = new ArrayList<>();
@@ -74,11 +72,14 @@ public class EstablecimientoServiceBean implements EstablecimientoServiceBeanRem
 //				    "SELECT h FROM Hotel h WHERE h.estado = ?1")
 //				    .setParameter(1, EstadoHotel.Aprobado)
 //				    .getResultList();
-    		List hoteles2 =  manager.createQuery(
+//    		hoteles = (List<Hotel>) hoteles2;   		
+    		
+    		List<Hotel> resultList = manager.createQuery(
 				    "SELECT h FROM Hotel h")
 				    .getResultList();
+			hoteles =  resultList;
     		
-    		hoteles = (List<Hotel>) hoteles2;
+
     	} catch(Exception e) {
     		e.printStackTrace();
     		System.out.println("Error al ejecutar la consulta de hoteles activos: " + e.getMessage());
@@ -115,7 +116,6 @@ public class EstablecimientoServiceBean implements EstablecimientoServiceBeanRem
 
 	@Override
 	public void grabarIdBO(int idBO, String idHotel) {
-		// TODO Auto-generated method stub
 		Hotel hotel= new Hotel();
 		hotel=this.gethotel(Integer.parseInt(idHotel));
 		hotel.setIdBO(idBO);

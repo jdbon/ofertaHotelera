@@ -2,7 +2,6 @@ package com.ofertahotelera.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -16,12 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.*;
-import com.ofertahotelera.dto.*;
-import com.ofertahotelera.entity.Hotel;
+import com.google.gson.reflect.TypeToken;
+import com.ofertahotelera.dto.ColaDTO;
+import com.ofertahotelera.dto.EstadoHotelDTO;
+import com.ofertahotelera.dto.HabitacionDTO;
+import com.ofertahotelera.dto.HotelDTO;
+import com.ofertahotelera.dto.MedioDePagoDTO;
+import com.ofertahotelera.dto.OfertaDTO;
+import com.ofertahotelera.dto.ServicioDTO;
 import com.ofertahotelera.integracion.InterfacesBO;
 import com.ofertahotelera.jms.Producer;
 import com.ofertahotelera.resource.EstablecimientoClient;
@@ -43,7 +44,6 @@ public class Controlador extends HttpServlet {
      */
     public Controlador() {
         super();
-        // TODO Auto-generated constructor stub
     }
     
 	@EJB
@@ -53,7 +53,6 @@ public class Controlador extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		 String value =request.getParameter("name");
 		 
 		 if ("ObtenerServicios".equals(value)){
@@ -98,7 +97,7 @@ public class Controlador extends HttpServlet {
 				String direccion=request.getParameter("direccion");
 				String email=request.getParameter("email");
 				//String estado=request.getParameter("estado");
-				String fotos=request.getParameter("fotos");
+//				String fotos=request.getParameter("fotos");
 				String latitud=request.getParameter("latitud");
 				String longitud=request.getParameter("longitud");
 //				String medioDePagos=request.getParameter("medioDePagos");
@@ -241,10 +240,9 @@ public class Controlador extends HttpServlet {
 				try {
 					idHotel = establecimiento.altaHotel(jsonInString);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				String jspPage = "/newBoard.jsp";
+				String jspPage = "/nuevaHabitacion.jsp";
 				System.out.println("Id hotel: "+idHotel);
 				
 				System.out.println("Obtener Servicios Habitacion");
@@ -350,7 +348,7 @@ public class Controlador extends HttpServlet {
 				request.setAttribute("serviciosHab",nombresServicios);
 				request.setAttribute("nombre", nombreHotel);
 				
-				String jspPage = "/newBoard.jsp";
+				String jspPage = "/nuevaHabitacion.jsp";
 				request.setAttribute("idHotel", String.valueOf(idHotel));
 				request.setAttribute("habitaciones", habs);
 				dispatch(jspPage, request, response);
@@ -501,12 +499,10 @@ public class Controlador extends HttpServlet {
 				System.out.println(jsonS);
 				
 				try {
-					producer.createcola(jsonS);
+					producer.createCola(jsonS);
 				} catch (NamingException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (JMSException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -527,7 +523,6 @@ public class Controlador extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 	protected void dispatch(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

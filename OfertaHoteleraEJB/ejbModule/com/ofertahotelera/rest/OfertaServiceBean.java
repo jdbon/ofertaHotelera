@@ -22,7 +22,6 @@ public class OfertaServiceBean implements OfertaServiceBeanRemote, OfertaService
      * Default constructor. 
      */
     public OfertaServiceBean() {
-        // TODO Auto-generated constructor stub
     }
     
 	public void altaOferta(String json, String idHab)
@@ -47,7 +46,6 @@ public class OfertaServiceBean implements OfertaServiceBeanRemote, OfertaService
 	}
 	
 	
-	@SuppressWarnings("unused")
 	private Habitacion getHabitacion(String idHab){
 		
     	try {

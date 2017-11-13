@@ -72,6 +72,7 @@ out.print("<input type=\"hidden\" name=\"nombre\" value=\""+nombre+"\">");
             <label>Servicios:</label>
          
                 <%
+                @SuppressWarnings("unchecked")
 List<String> servicios = (List<String>) request.getAttribute("serviciosHab");
                 if(servicios != null){
    int cantServ = servicios.size();
@@ -84,6 +85,7 @@ List<String> servicios = (List<String>) request.getAttribute("serviciosHab");
     }
 %>
 </div>
+
         
         
         
@@ -105,8 +107,9 @@ List<String> servicios = (List<String>) request.getAttribute("serviciosHab");
         <button type="reset">Cancelar</button>
         
     </form>
-    </br>
-    </br>
+</div>
+    <br />
+    <br />
     
    <form action="Controlador" method="get">
      <%
@@ -128,7 +131,8 @@ List<String> servicios = (List<String>) request.getAttribute("serviciosHab");
         </tr>
         </thead>
         <tbody>
-         <%
+<%
+@SuppressWarnings("unchecked")
 List<HabitacionDTO> habitaciones = (List<HabitacionDTO>) request.getAttribute("habitaciones");
     if(habitaciones != null){
     	for(HabitacionDTO h: habitaciones){

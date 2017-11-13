@@ -1,16 +1,10 @@
 package com.ofertahotelera.integracion;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.ofertahotelera.resource.EstablecimientoClient;
-import com.ofertahotelera.rest.EstablecimientoServiceBeanRemote;
 
 public class InterfacesBO {
 	private static InterfacesBO instance = null;
@@ -42,6 +36,7 @@ public class InterfacesBO {
 		return response2;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public List<String> obtenerServiciosPorTipo(String json,String tipo) {
 //		url = new URL("http://192.168.1.92:8080/TPO_BO_WEB/rest/ServiciosBO/GetServiciosPorTipo");
 //		urlConnection = (HttpURLConnection) url.openConnection();

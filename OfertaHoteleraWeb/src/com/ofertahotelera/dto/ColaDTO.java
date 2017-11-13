@@ -1,28 +1,27 @@
 package com.ofertahotelera.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ColaDTO {
 	private int codigo_prestador;
 	private String nombre;
 	private String destino;
-	private String fdesde;
-	private String fhasta;
-	private String foto;
-	private String descripcion;
-	private List<String> serviciosHotel;
-	private float precioOferta;
-	private int cantPersonas;
-	private String fotoHab;
-	private String descripcionHab;
-	private List<String> listaServiciosHab;
-	private double lat;
-	private double longi;
-	private String politica;
-	private List<Integer> mediosDePago;
-	private String email;
-	private int cupoOferta;
+	private String fecha_desde;
+	private String fecha_hasta;
+	private String foto_hotel;
+	private String descripcion_hotel;
+	private List<String> lista_servicios;
+	private float precio_habitacion;
+	private int cantidad_personas;
+	private String foto_habitacion;
+	private String descripcion_habitacion;
+	private List<String> lista_servicios_habitacion;
+	private double latitud;
+	private double longitud;
+	private String politica_cancelacion;
+	private List<Integer> medio_pago_hotel;
+	private String email_hotel;
+	private int cupo;
 	
 	
 	public ColaDTO(int codigo_prestador, String nombre, String destino, String fdesde, String fhasta, String foto,
@@ -33,22 +32,22 @@ public class ColaDTO {
 		this.codigo_prestador = codigo_prestador;
 		this.nombre = nombre;
 		this.destino = destino;
-		this.fdesde = fdesde;
-		this.fhasta = fhasta;
-		this.foto = foto;
-		this.descripcion = descripcion;
-		this.serviciosHotel = serviciosHotel;
-		this.precioOferta = precioOferta;
-		this.cantPersonas = cantPersonas;
-		this.fotoHab = fotoHab;
-		this.descripcionHab = descripcionHab;
-		this.listaServiciosHab = listaServiciosHab;
-		this.lat = lat;
-		this.longi = longi;
-		this.politica = politica;
-		this.mediosDePago = mediosDePago;
-		this.email = email;
-		this.cupoOferta = cupoOferta;
+		this.fecha_desde = fdesde;
+		this.fecha_hasta = fhasta;
+		this.foto_hotel = foto;
+		this.descripcion_hotel = descripcion;
+		this.lista_servicios = serviciosHotel;
+		this.precio_habitacion = precioOferta;
+		this.cantidad_personas = cantPersonas;
+		this.foto_habitacion = fotoHab;
+		this.descripcion_habitacion = descripcionHab;
+		this.lista_servicios_habitacion = listaServiciosHab;
+		this.latitud = lat;
+		this.longitud = longi;
+		this.politica_cancelacion = politica;
+		this.medio_pago_hotel = mediosDePago;
+		this.email_hotel = email;
+		this.cupo = cupoOferta;
 	}
 	public int getCodigo_prestador() {
 		return codigo_prestador;
@@ -68,101 +67,101 @@ public class ColaDTO {
 	public void setDestino(String destino) {
 		this.destino = destino;
 	}
-	public String getFdesde() {
-		return fdesde;
+	public String getFecha_desde() {
+		return fecha_desde;
 	}
-	public void setFdesde(String fdesde) {
-		this.fdesde = fdesde;
+	public void setFecha_desde(String fdesde) {
+		this.fecha_desde = fdesde;
 	}
-	public String getFhasta() {
-		return fhasta;
+	public String getFecha_hasta() {
+		return fecha_hasta;
 	}
-	public void setFhasta(String fhasta) {
-		this.fhasta = fhasta;
+	public void setFecha_hasta(String fhasta) {
+		this.fecha_hasta = fhasta;
 	}
-	public String getFoto() {
-		return foto;
+	public String getFoto_hotel() {
+		return foto_hotel;
 	}
-	public void setFoto(String foto) {
-		this.foto = foto;
+	public void setFoto_hotel(String foto) {
+		this.foto_hotel = foto;
 	}
-	public String getDescripcion() {
-		return descripcion;
+	public String getDescripcion_hotel() {
+		return descripcion_hotel;
 	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescripcion_hotel(String descripcion) {
+		this.descripcion_hotel = descripcion;
 	}
-	public List<String> getServiciosHotel() {
-		return serviciosHotel;
+	public List<String> getLista_servicios() {
+		return lista_servicios;
 	}
-	public void setServiciosHotel(List<String> serviciosHotel) {
-		this.serviciosHotel = serviciosHotel;
+	public void setLista_servicios(List<String> serviciosHotel) {
+		this.lista_servicios = serviciosHotel;
 	}
-	public float getPrecioOferta() {
-		return precioOferta;
+	public float getPrecio_habitacion() {
+		return precio_habitacion;
 	}
-	public void setPrecioOferta(float precioOferta) {
-		this.precioOferta = precioOferta;
+	public void setPrecio_habitacion(float precioOferta) {
+		this.precio_habitacion = precioOferta;
 	}
-	public int getCantPersonas() {
-		return cantPersonas;
+	public int getCantidad_personas() {
+		return cantidad_personas;
 	}
-	public void setCantPersonas(int cantPersonas) {
-		this.cantPersonas = cantPersonas;
+	public void setCantidad_personas(int cantPersonas) {
+		this.cantidad_personas = cantPersonas;
 	}
-	public String getFotoHab() {
-		return fotoHab;
+	public String getFoto_habitacion() {
+		return foto_habitacion;
 	}
-	public void setFotoHab(String fotoHab) {
-		this.fotoHab = fotoHab;
+	public void setFoto_habitacion(String fotoHab) {
+		this.foto_habitacion = fotoHab;
 	}
-	public String getDescripcionHab() {
-		return descripcionHab;
+	public String getDescripcion_habitacion() {
+		return descripcion_habitacion;
 	}
-	public void setDescripcionHab(String descripcionHab) {
-		this.descripcionHab = descripcionHab;
+	public void setDescripcion_habitacion(String descripcionHab) {
+		this.descripcion_habitacion = descripcionHab;
 	}
-	public List<String> getListaServiciosHab() {
-		return listaServiciosHab;
+	public List<String> getLista_servicios_habitacion() {
+		return lista_servicios_habitacion;
 	}
-	public void setListaServiciosHab(List<String> listaServiciosHab) {
-		this.listaServiciosHab = listaServiciosHab;
+	public void setLista_servicios_habitacion(List<String> listaServiciosHab) {
+		this.lista_servicios_habitacion = listaServiciosHab;
 	}
-	public double getLat() {
-		return lat;
+	public double getLatitud() {
+		return latitud;
 	}
-	public void setLat(double lat) {
-		this.lat = lat;
+	public void setLatitud(double lat) {
+		this.latitud = lat;
 	}
-	public double getLongi() {
-		return longi;
+	public double getLongitud() {
+		return longitud;
 	}
-	public void setLongi(double longi) {
-		this.longi = longi;
+	public void setLongitud(double longi) {
+		this.longitud = longi;
 	}
-	public String getPolitica() {
-		return politica;
+	public String getPolitica_cancelacion() {
+		return politica_cancelacion;
 	}
-	public void setPolitica(String politica) {
-		this.politica = politica;
+	public void setPolitica_cancelacion(String politica) {
+		this.politica_cancelacion = politica;
 	}
-	public List<Integer> getMediosDePago() {
-		return mediosDePago;
+	public List<Integer> getMedio_pago_hotel() {
+		return medio_pago_hotel;
 	}
-	public void setMediosDePago(List<Integer> mediosDePago) {
-		this.mediosDePago = mediosDePago;
+	public void setMedio_pago_hotel(List<Integer> mediosDePago) {
+		this.medio_pago_hotel = mediosDePago;
 	}
-	public String getEmail() {
-		return email;
+	public String getEmail_hotel() {
+		return email_hotel;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail_hotel(String email) {
+		this.email_hotel = email;
 	}
-	public int getCupoOferta() {
-		return cupoOferta;
+	public int getCupo() {
+		return cupo;
 	}
-	public void setCupoOferta(int cupoOferta) {
-		this.cupoOferta = cupoOferta;
+	public void setCupo(int cupoOferta) {
+		this.cupo = cupoOferta;
 	}
 	
 	

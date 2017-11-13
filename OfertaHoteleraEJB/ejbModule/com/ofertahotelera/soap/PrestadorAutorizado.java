@@ -14,7 +14,7 @@ public class PrestadorAutorizado implements PrestadorAutorizadoRemote, Prestador
      * Default constructor. 
      */
     public PrestadorAutorizado() {
-        // TODO Auto-generated constructor stub
+    	
     }
 
 }

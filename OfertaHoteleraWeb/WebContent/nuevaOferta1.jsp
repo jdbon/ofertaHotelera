@@ -14,7 +14,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Oferta Hotelera</a>
+            <a class="navbar-brand">Oferta Hotelera</a>
         </div>
         <ul class="nav navbar-nav">
             <li><a href="/OfertaHoteleraWeb/">Inicio</a></li>
@@ -33,7 +33,8 @@
         <div class="form-group">
             <label>Elegi el hotel:</label>
                 <select class="form-control" name="selectHotel">
-                <%
+<%
+@SuppressWarnings("unchecked")
 List<HotelDTO> hoteles = (List<HotelDTO>) request.getAttribute("hoteles");
     if(hoteles != null){
     	for(HotelDTO h: hoteles){

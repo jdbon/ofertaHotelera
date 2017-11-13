@@ -1,11 +1,5 @@
 package com.ofertahotelera.dto;
 
-
-import java.util.*;
-
-import javax.persistence.*;
-
-
 public class OfertaDTO {
 	
 

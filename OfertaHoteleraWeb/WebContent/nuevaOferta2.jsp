@@ -14,7 +14,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Oferta Hotelera</a>
+            <a class="navbar-brand">Oferta Hotelera</a>
         </div>
         <ul class="nav navbar-nav">
             <li><a href="/OfertaHoteleraWeb/">Inicio</a></li>
@@ -123,7 +123,7 @@ HotelDTO hotel = (HotelDTO) request.getAttribute("hotel");
         </tr>
         </tbody>
     </table>
-    <div id="response-content"></div>
-</div> -->
+    <div id="response-content"></div> -->
+</div>
 </body>
 </html>

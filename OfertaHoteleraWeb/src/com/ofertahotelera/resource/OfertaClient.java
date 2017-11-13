@@ -46,7 +46,6 @@ public class OfertaClient {
 	}
 
 	public void altaOferta(String ofertaJson, String idHab) {
-		// TODO Auto-generated method stub
 		System.out.println(idHab + ofertaJson);
 		mbr.altaOferta(ofertaJson,idHab);
 	}
