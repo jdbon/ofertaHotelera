@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ofertahotelera.dto.ColaDTO;
-import com.ofertahotelera.dto.EstadoHotelDTO;
+//import com.ofertahotelera.dto.EstadoHotelDTO;
 import com.ofertahotelera.dto.HabitacionDTO;
 import com.ofertahotelera.dto.HotelDTO;
 import com.ofertahotelera.dto.MedioDePagoDTO;
@@ -60,7 +60,11 @@ public class Controlador extends HttpServlet {
 			 	System.out.println("Obtener Servicios Hotel");
 				String json = "{ \"nombre\" : \"Hotel\" }";
 				List<String> nombresServicios =new ArrayList<>();
-				nombresServicios = interfaz.obtenerServiciosPorTipo(json,"Hotel");
+				try {
+					nombresServicios = interfaz.obtenerServiciosPorTipo(json,"Hotel");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				
 				
 				
@@ -96,13 +100,13 @@ public class Controlador extends HttpServlet {
 				String destino=request.getParameter("selectDestino");
 				String direccion=request.getParameter("direccion");
 				String email=request.getParameter("email");
-				//String estado=request.getParameter("estado");
+//				String estado=request.getParameter("estado");
 //				String fotos=request.getParameter("fotos");
 				String latitud=request.getParameter("latitud");
 				String longitud=request.getParameter("longitud");
 //				String medioDePagos=request.getParameter("medioDePagos");
 				String nombre=request.getParameter("nombre");
-				//String servicios=request.getParameter("servicios");
+//				String servicios=request.getParameter("servicios");
 				String foto=request.getParameter("selectFoto");
 				
 				String tarjeta=request.getParameter("Tarjeta");
@@ -248,7 +252,11 @@ public class Controlador extends HttpServlet {
 				System.out.println("Obtener Servicios Habitacion");
 				String json = "{ \"nombre\" : \"Habitacion\" }";
 				List<String> nombresServicios =new ArrayList<>();
-				nombresServicios = interfaz.obtenerServiciosPorTipo(json,"Habitacion");
+				try {
+					nombresServicios = interfaz.obtenerServiciosPorTipo(json,"Habitacion");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				
 				
 				String jsonLog = "{ \"plataformaEnvia\":\"OH\", \"plataformaRecibe\":\"BO\", \"servicio\":\"Get Servicio Habitacion\", \"observacion\":\"SUCCESS\" }";
@@ -343,7 +351,11 @@ public class Controlador extends HttpServlet {
 				System.out.println("Obtener Servicios Habitacion");
 				String json = "{ \"nombre\" : \"Habitacion\" }";
 				List<String> nombresServicios =new ArrayList<>();
-				nombresServicios = interfaz.obtenerServiciosPorTipo(json,"Habitacion");
+				try {
+					nombresServicios = interfaz.obtenerServiciosPorTipo(json,"Habitacion");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				
 				request.setAttribute("serviciosHab",nombresServicios);
 				request.setAttribute("nombre", nombreHotel);
@@ -387,30 +399,30 @@ public class Controlador extends HttpServlet {
 				Gson gson = new Gson();
 				h=gson.fromJson(hotel, HotelDTO.class);
 				
-				String estadoHo = EstadoHotelDTO.Pendiente.toString();
+//				String estadoHo = EstadoHotelDTO.Pendiente.toString();
+//				
+//				if (h.getEstado()==EstadoHotelDTO.Pendiente)
+//				{
+//					///chequear con SOap si el hotel esta aprobado y actualizar la bbase
+//					// actualziar el estado
+//					
+//					String jsonLog = "{ \"plataformaEnvia\":\"OH\", \"plataformaRecibe\":\"BO\", \"servicio\":\"Prestador Autorizado\", \"observacion\":\"SUCCESS\" }";
+//					establecimiento.grabarLog(jsonLog);
+//					
+//							
+//				}
 				
-				if (h.getEstado()==EstadoHotelDTO.Pendiente)
-				{
-					///chequear con SOap si el hotel esta aprobado y actualizar la bbase
-					// actualziar el estado
-					
-					String jsonLog = "{ \"plataformaEnvia\":\"OH\", \"plataformaRecibe\":\"BO\", \"servicio\":\"Prestador Autorizado\", \"observacion\":\"SUCCESS\" }";
-					establecimiento.grabarLog(jsonLog);
-					
-							
-				}
-				
-				if (h.getEstado()==EstadoHotelDTO.Aprobado ||  estadoHo==EstadoHotelDTO.Aprobado.toString()) {
-				
+//				if (h.getEstado()==EstadoHotelDTO.Aprobado ||  estadoHo==EstadoHotelDTO.Aprobado.toString()) {
+//				
 				request.setAttribute("selectHotel", idHotel);
 				request.setAttribute("hotel", h);
 				String jspPage = "/nuevaOferta2.jsp";
 				dispatch(jspPage, request, response);
-				}else {
-					System.out.println("Hotel invalido");
-					String jspPage ="/OfertaHoteleraWeb/Controlador?name=AltaOferta1";
-					dispatch(jspPage, request, response);				
-					}
+//				}else {
+//					System.out.println("Hotel invalido");
+//					String jspPage ="/OfertaHoteleraWeb/Controlador?name=AltaOferta1";
+//					dispatch(jspPage, request, response);				
+					//}
 			}
 			if ("AltaOferta3".equals(value)){
 				System.out.println("entro al Alta Oferta 3");

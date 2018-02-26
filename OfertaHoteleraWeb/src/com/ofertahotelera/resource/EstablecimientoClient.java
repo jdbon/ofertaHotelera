@@ -1,7 +1,6 @@
 package com.ofertahotelera.resource;
 
 
-
 import java.util.Hashtable;
 
 import javax.naming.Context;
@@ -107,16 +106,6 @@ public class EstablecimientoClient {
 		}
 		
 	}
-
-
-
-	
-	
-	
-
-	
-
-
 
 	
 }
